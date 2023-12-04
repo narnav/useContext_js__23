@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { ColorContext } from "./ColorContext";
+import Login from "./Login";
+import { UserContext } from "./UserContext";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [color, setcolor] = useState("red");
+    const [userName, setuserName] = useState("")
+    return (
+        <div>
+            <h1 style={{ color: color }}> Samp</h1>
+
+            <ColorContext.Provider value={{ color, setcolor }}>
+                <UserContext.Provider value={{ userName, setuserName }}>
+                    <Login></Login>
+                    <Outlet></Outlet>
+                </UserContext.Provider>
+            </ColorContext.Provider>
+        </div>
+    );
+};
 
 export default App;
